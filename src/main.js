@@ -3,6 +3,12 @@ import iziToast from "izitoast";
 // Додатковий імпорт стилів
 import "izitoast/dist/css/iziToast.min.css";
 
+// Описаний у документації
+import SimpleLightbox from "simplelightbox";
+// Додатковий імпорт стилів
+import "simplelightbox/dist/simple-lightbox.min.css";
+
+
 import { markup } from "./js/render-functions.js";
 import { fetchPhotos } from "./js/pixabay-api.js";
 
@@ -11,6 +17,7 @@ const searchFormEl = document.querySelector(".search-form")
 const loaderEl = document.querySelector(".loader")
 
 loaderEl.classList.add("is-hidden")
+
 
 function onSearchFormSubmit(event) {
   event.preventDefault()
@@ -38,6 +45,7 @@ function onSearchFormSubmit(event) {
       })
       }
       galleryEl.innerHTML = markup(imagesData.hits); 
+      lightbox.refresh();
     })
     .catch(error => console.log(error))
     .finally(() => {
@@ -47,3 +55,4 @@ function onSearchFormSubmit(event) {
 }
 
 searchFormEl.addEventListener("submit", onSearchFormSubmit)
+const lightbox = new SimpleLightbox('.gallery-link');
